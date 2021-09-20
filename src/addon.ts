@@ -8,8 +8,8 @@ import { string2ReplaceParam } from "utils/input"
 const configs: IConfig[] = [
   {
     name: "_CAPNAME_",
-    intro: "version: 0.9.0 仅用于技术测试\nmade by ourongxing",
-    link: "https://github.com/ourongxing",
+    intro: "version: 0.9.0 仅作为开发模板\nmade by ourongxing",
+    link: "https://github.com/ourongxing/copysearch",
     settings: [
       {
         key: "rightMode",
@@ -48,7 +48,7 @@ const configs: IConfig[] = [
   {
     name: "Copy",
     intro: "自定义在复制模式下点击卡片时复制的内容\n点击查看支持的变量",
-    link: "https://github.com/ourongxing",
+    link: "https://busiyi.notion.site/Copy-61ef85cf19f24de2a14814db0e3ea05a",
     settings: [
       {
         key: "customCopy",
@@ -59,7 +59,7 @@ const configs: IConfig[] = [
   {
     name: "Search",
     intro: "自定义 Url，点击查看更多 UrlScheme",
-    link: "https://github.com/ourongxing",
+    link: "https://busiyi.notion.site/Search-26440b198773492cbc1e39015ae55654",
     settings: [
       {
         key: "wordUrl",
@@ -79,7 +79,8 @@ const configs: IConfig[] = [
       {
         key: "customUrl",
         type: cellViewType.input,
-        help: "自定义，点击查看具体输入格式"
+        help: "自定义，点击查看具体输入格式",
+        link: "https://busiyi.notion.site/Search-26440b198773492cbc1e39015ae55654",
       },
     ],
   }
@@ -145,7 +146,7 @@ const actions: IActionMethod = {
 const dataSource = genDataSource(configs, {
   // action 板块详情
   name: "MagicAction",
-  intro: "可多选卡片，复制内容格式同复制模式"
+  intro: "可多选卡片，复制内容格式同复制模式下的格式"
 })
 
 export { utils, actions, dataSource }

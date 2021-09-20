@@ -6,11 +6,11 @@ const profileType = {
     clickCardOn: false,
     clickExcerptOn: false,
     titleLinkFirst: false,
-    wordUrl: "https://cn.bing.com/dict/search?q=$&",
+    wordUrl: "eudic://dict/$&",
     sentenceUrl: "https://translate.google.com/?hl=zh-CN&sl=en&tl=zh-CN&text=$&&op=translate",
     defaultUrl: "https://cn.bing.com/search?q=$&",
     customUrl: "",
-    customCopy: "%title"
+    customCopy: `"%title"`
 }
 
 const docProfileType = {
