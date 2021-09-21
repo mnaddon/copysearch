@@ -18,7 +18,7 @@ const tableViewTitleForHeaderInSection = (tableView: UITableView, section: numbe
 
 const tableViewHeightForRowAtIndexPath = (tableView: UITableView, indexPath: NSIndexPath) => {
     const row = dataSource[indexPath.section].rows[indexPath.row]
-    if (row.key == "space") return 200
+    if (row.key == "space") return 300
     else if (row.type === cellViewType.plainText) {
         let num = row.label!.length - row.label!.replace(/[\r\n]/g, '').length
         return 30 + num * 15

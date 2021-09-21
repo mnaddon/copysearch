@@ -9,7 +9,6 @@ const tag2indexPath = (tag: number): NSIndexPath => {
     }
 }
 
-
 const tableViewDidSelectRowAtIndexPath = (tableView: UITableView, indexPath: NSIndexPath) => {
     const section = dataSource[indexPath.section]
     const row = section.rows[indexPath.row]
