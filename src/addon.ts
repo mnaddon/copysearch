@@ -1,8 +1,8 @@
 import genDataSource from "utils/dataSource"
 import { profile } from "profile"
 import { isHalfWidth, wordCount } from "utils/text"
-import { getSelectNodes } from "utils/note"
-import { showHUD } from "utils/common"
+import { excerptNotes, getSelectNodes } from "utils/note"
+import { log, showHUD } from "utils/common"
 import { string2ReplaceParam } from "utils/input"
 
 const configs: IConfig[] = [
@@ -32,10 +32,10 @@ const configs: IConfig[] = [
         label: "点击摘录时执行",
       },
       {
-        key: "titleLinkFirst",
+        key: "clickCardOn",
         type: cellViewType.switch,
-        label: "标题链接取第一个",
-      }
+        label: "点击卡片时执行",
+      },
     ],
     actions: [
       {
@@ -61,6 +61,11 @@ const configs: IConfig[] = [
     intro: "自定义 Url，点击查看更多 UrlScheme",
     link: "https://busiyi.notion.site/Search-26440b198773492cbc1e39015ae55654",
     settings: [
+      {
+        key: "titleLinkFirst",
+        type: cellViewType.switch,
+        label: "标题链接取第一个",
+      },
       {
         key: "wordUrl",
         type: cellViewType.inlineInput,
@@ -108,12 +113,28 @@ const utils = {
       return text.replace(/^.*$/, profile.defaultUrl)
     return false
   },
-
+  getAllText(note: MbBookNote) {
+    const textArr = []
+    if (note.excerptText) textArr.push(note.excerptText)
+    note.comments.forEach(comment => {
+      switch (comment.type) {
+        case "TextNote":
+        case "HtmlNote":
+          const text = comment.text.trim()
+          if (text && !text.includes("marginnote3app"))
+            textArr.push(text)
+          break
+        case "LinkNote":
+          if (comment.q_htext) textArr.push(comment.q_htext.trim())
+      }
+    })
+    return textArr.join("\n")
+  },
   getCustomText(note: MbBookNote) {
     // 后期可以慢慢加
     const vars = {
       title: note.noteTitle ?? "",
-      text: note.notesText ?? "",
+      text: this.getAllText(note),
       createTime: note.createDate,
       modifiedTime: note.modifiedDate,
       link: "marginnote3app://note/" + note.noteId,
@@ -132,7 +153,9 @@ const actions: IActionMethod = {
     try {
       const nodes = getSelectNodes()
       let texts: string[] = []
-      nodes.forEach((node, index) => {
+      if (nodes.length == 1)
+        texts.push(utils.getCustomText(nodes[0]))
+      else nodes.forEach((node, index) => {
         texts.push(String(index + 1) + ". " + utils.getCustomText(node))
       })
       const pasteBoard = UIPasteboard.generalPasteboard()
