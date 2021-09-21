@@ -30,6 +30,7 @@ const tableViewDidSelectRowAtIndexPath = (tableView: UITableView, indexPath: NSI
                 })
             break
         case cellViewType.button:
+            if (row.key == "space") return
             postNotification('_NAME_ButtonClick', {
                 key: row.key,
                 content: ""
