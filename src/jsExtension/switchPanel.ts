@@ -1,5 +1,6 @@
 import { profile } from "profile";
 import { delay, delayBreak, log, showHUD } from "utils/common";
+import mnaddon from "../../mnaddon.json"
 
 // 面板状态
 let panelStatus = false
@@ -50,9 +51,9 @@ const switchPanel = async () => {
         log("单击", "switch")
         profile.on = !profile.on
         profile.on ? (profile.copyMode ?
-            showHUD("_CAPNAME_ 已打开，当前处于 Copy 模式") :
-            showHUD("_CAPNAME_ 已打开，当前处于 Search 模式")) :
-            showHUD("_CAPNAME_ 已关闭")
+            showHUD(`${mnaddon.title} 已打开，当前处于 Copy 模式`) :
+            showHUD(`${mnaddon.title} 已打开，当前处于 Search 模式`)) :
+            showHUD(`${mnaddon.title} 已关闭`)
         self.studyController.refreshAddonCommands()
     }
     isWaiting = false

@@ -31,7 +31,7 @@ const getNoteById = (noteid: string): MbBookNote => {
  * 可撤销的动作，所有修改数据的动作都应该用这个方法包裹
  */
 const undoGrouping = (action: () => void) => {
-  UndoManager.sharedInstance().undoGrouping("_NAME_", self.notebookid, () => {
+  UndoManager.sharedInstance().undoGrouping("${$name}", self.notebookid, () => {
     action()
     // 同步修改到数据库
     Database.sharedInstance().setNotebookSyncDirty(self.notebookid)

@@ -1,4 +1,4 @@
-import { dataSource } from "addon"
+import { $name, dataSource } from "addon"
 import { log, showHUD } from "utils/common"
 import { profile, docProfile, IProfile, IProfile_doc } from "profile"
 
@@ -32,7 +32,7 @@ const refreshDocDataSource = (docProfile: IProfile_doc) => {
 export const readProfile = (docmd5: string, readAll = false) => {
     if (readAll) {
         let tmp_global = NSUserDefaults.standardUserDefaults()
-            .objectForKey("marginnote__NAME__profile_global")
+            .objectForKey(`marginnote_${$name}_profile_global`)
         if (tmp_global) Object.assign(profile, JSON.parse(tmp_global))
         for (const section of dataSource) {
             if (section.header == "MagicAction") continue
@@ -49,7 +49,7 @@ export const readProfile = (docmd5: string, readAll = false) => {
         }
     }
     let tmp_doc = NSUserDefaults.standardUserDefaults()
-        .objectForKey("marginnote__NAME__profile_doc")
+        .objectForKey(`marginnote_${$name}_profile_doc`)
     if (tmp_doc && JSON.parse(tmp_doc)[docmd5]) {
         Object.assign(profile, JSON.parse(tmp_doc)[docmd5])
         Object.assign(profile_doc, JSON.parse(tmp_doc))
@@ -73,12 +73,12 @@ export const saveProfile = (docmd5: string, saveAll = false) => {
     })
     NSUserDefaults.standardUserDefaults().setObjectForKey(
         JSON.stringify(Object.assign(profile_doc, { [docmd5]: thisDocProfile })),
-        "marginnote__NAME__profile_doc")
+        `marginnote_${$name}_profile_doc`)
     log("保存文档配置", "profile")
     log(thisDocProfile, "profile")
     if (saveAll) {
         log("保存全部配置", "profile")
         NSUserDefaults.standardUserDefaults().setObjectForKey(
-            JSON.stringify(profile), "marginnote__NAME__profile_global")
+            JSON.stringify(profile), `marginnote_${$name}_profile_global`)
     }
 }

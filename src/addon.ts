@@ -1,14 +1,15 @@
 import genDataSource from "utils/dataSource"
 import { profile } from "profile"
 import { isHalfWidth, wordCount } from "utils/text"
-import { excerptNotes, getSelectNodes } from "utils/note"
-import { log, showHUD } from "utils/common"
+import { getSelectNodes } from "utils/note"
+import { showHUD } from "utils/common"
 import { string2ReplaceParam } from "utils/input"
+import mnaddon from "../mnaddon.json"
 
 const configs: IConfig[] = [
   {
-    name: "_CAPNAME_",
-    intro: "version: 0.9.0 仅作为开发模板\nmade by ourongxing",
+    name: mnaddon.title,
+    intro: `version: ${mnaddon.version} 仅作为开发模板\nmade by ${mnaddon.author}`,
     link: "https://github.com/ourongxing/copysearch",
     settings: [
       {
@@ -172,4 +173,5 @@ const dataSource = genDataSource(configs, {
   intro: "可多选卡片，复制内容格式同复制模式下的格式"
 })
 
-export { utils, actions, dataSource }
+const $name = mnaddon.addonid.split(".")[2]
+export { $name, utils, actions, dataSource }

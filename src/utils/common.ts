@@ -1,5 +1,8 @@
+import mnaddon from "../../mnaddon.json"
+const $name = mnaddon.addonid.split(".")[2]
+
 const log = (obj: any, suffix = "normal") => {
-  JSB.log(`_NAME_-${suffix} %@`, obj);
+  JSB.log(`${$name}-${suffix} %@`, obj);
 }
 
 const showHUD = (message: string, duration: number = 1) => {
@@ -11,7 +14,7 @@ const alert = (message: string) => {
 }
 
 const getObjCClassDeclar = (name: string, type: string, delegate: Array<string> = []) => {
-  let str: string = `${name} : ${type}`
+  let str: string = `${$name} : ${type}`
   // 可以不用写 delegate 协议名
   if (delegate.length) {
     delegate.forEach(value => {
@@ -42,7 +45,6 @@ const postNotification = (key: string, userInfo: any) => {
   NSNotificationCenter.defaultCenter()
     .postNotificationNameObjectUserInfo(key, self, userInfo)
 }
-
 
 export {
   log,

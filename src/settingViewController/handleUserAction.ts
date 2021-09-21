@@ -1,5 +1,5 @@
 import { openUrl, postNotification, showHUD } from "utils/common"
-import { dataSource } from "addon"
+import { dataSource, $name } from "addon"
 import { checkInputCorrect } from "utils/input"
 
 const tag2indexPath = (tag: number): NSIndexPath => {
@@ -22,7 +22,7 @@ const tableViewDidSelectRowAtIndexPath = (tableView: UITableView, indexPath: NSI
                 (alert: UIAlertView) => {
                     let text = alert.textFieldAtIndex(0).text
                     if (!text) return
-                    postNotification('_NAME_ButtonClick', {
+                    postNotification(`${$name}ButtonClick`, {
                         key: row.key,
                         content: text
                     })
@@ -30,7 +30,7 @@ const tableViewDidSelectRowAtIndexPath = (tableView: UITableView, indexPath: NSI
             break
         case cellViewType.button:
             if (row.key == "space") return
-            postNotification('_NAME_ButtonClick', {
+            postNotification(`${$name}ButtonClick`, {
                 key: row.key,
                 content: ""
             })
@@ -47,7 +47,7 @@ const textFieldShouldReturn = (sender: UITextField) => {
         // 输入正确则取消光标
         sender.resignFirstResponder()
         row.content = text
-        postNotification('_NAME_InputOver', {
+        postNotification(`${$name}InputOver`, {
             name: section.header.toLocaleLowerCase(),
             key: row.key, content: text
         })
@@ -60,7 +60,7 @@ const switchChange = (sender: UISwitch) => {
     const section = dataSource[indexPath.section]
     const row = section.rows[indexPath.row]
     row.status = sender.on
-    postNotification('_NAME_SwitchChange', {
+    postNotification(`${$name}SwitchChange`, {
         name: section.header.toLowerCase(),
         key: row.key, status: sender.on
     })
