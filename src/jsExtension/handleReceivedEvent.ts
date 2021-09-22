@@ -34,8 +34,12 @@ const onButtonClick: eventHandler = ({ userInfo }) => {
 
 const onSwitchChange: eventHandler = ({ userInfo }) => {
   profile[userInfo.key] = userInfo.status
-  if (userInfo.key == "rightMode") {
-    layoutViewController()
+  switch (userInfo.key) {
+    case "rightMode":
+      layoutViewController()
+      break
+    case "copyMode":
+      showHUD("切换到 Copy 模式")
   }
 }
 

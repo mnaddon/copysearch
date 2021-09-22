@@ -10,6 +10,7 @@ const copySearch = ({ text, note }: { text?: string, note?: MbBookNote }) => {
         // 卡片信息
         else if (note && profile.customCopy)
             pasteBoard.string = utils.getCustomText(note)
+        showHUD("复制成功")
         return
     }
     if (text) {

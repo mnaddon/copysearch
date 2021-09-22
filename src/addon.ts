@@ -1,7 +1,7 @@
 import genDataSource from "utils/dataSource"
 import { profile } from "profile"
 import { isHalfWidth, wordCount } from "utils/text"
-import { getSelectNodes } from "utils/note"
+import { getAllText, getSelectNodes } from "utils/note"
 import { showHUD } from "utils/common"
 import { string2ReplaceParam } from "utils/input"
 import mnaddon from "../mnaddon.json"
@@ -9,7 +9,7 @@ import mnaddon from "../mnaddon.json"
 const configs: IConfig[] = [
   {
     name: mnaddon.title,
-    intro: `version: ${mnaddon.version} 仅作为开发模板\nmade by ${mnaddon.author}`,
+    intro: `version: ${mnaddon.version} 仅用于技术测试\nmade by ${mnaddon.author}`,
     link: "https://github.com/ourongxing/copysearch",
     settings: [
       {
@@ -114,35 +114,18 @@ const utils = {
       return text.replace(/^.*$/, profile.defaultUrl)
     return false
   },
-  getAllText(note: MbBookNote) {
-    const textArr = []
-    if (note.excerptText) textArr.push(note.excerptText)
-    note.comments.forEach(comment => {
-      switch (comment.type) {
-        case "TextNote":
-        case "HtmlNote":
-          const text = comment.text.trim()
-          if (text && !text.includes("marginnote3app"))
-            textArr.push(text)
-          break
-        case "LinkNote":
-          if (comment.q_htext) textArr.push(comment.q_htext.trim())
-      }
-    })
-    return textArr.join("\n")
-  },
   getCustomText(note: MbBookNote) {
     // 后期可以慢慢加
     const vars = {
       title: note.noteTitle ?? "",
-      text: this.getAllText(note),
+      text: getAllText(note),
       createTime: note.createDate,
       modifiedTime: note.modifiedDate,
       link: "marginnote3app://note/" + note.noteId,
     }
     let _text = JSON.parse(`{"text": ${profile.customCopy}}`).text
     Object.entries(vars).forEach(([key, value]) => {
-      const reg = new RegExp("%" + key, "g")
+      const reg = new RegExp(`{{${key}}}`, "g")
       _text = _text.replace(reg, <string>value)
     })
     return _text.replace(/\n{2,}/g, "\n")
