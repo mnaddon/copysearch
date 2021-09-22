@@ -4,14 +4,25 @@ import { profile } from "profile"
 import { getNoteById, getSelectNodes, RefreshAfterDBChange, undoGrouping } from "utils/note"
 import { delayBreak, log, showHUD } from "utils/common"
 import copySearch from "./copySearchHandler"
+import eventHandlerController from "utils/event"
+import { $name } from "addon"
 
-declare interface IUserInfo {
+interface IUserInfo {
   [k: string]: any
 }
 
 interface eventHandler {
   ({ userInfo }: { userInfo: IUserInfo }): void
 }
+
+export const eventCtrl = eventHandlerController([
+  { event: `${$name}InputOver` },
+  { event: `${$name}SwitchChange` },
+  { event: `${$name}ButtonClick` },
+  { event: 'PopupMenuOnSelection' },
+  { event: 'ActiveDigestNote' },
+  { event: 'PopupMenuOnNote' }
+])
 
 const onButtonClick: eventHandler = ({ userInfo }) => {
   // 传入你需要的内容

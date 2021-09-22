@@ -1,19 +1,11 @@
 import settingViewControllerInst from "settingViewController/main"
-import eventHandlerController from "utils/event"
-import { readProfile, saveProfile } from "utils/profile";
+import { readProfile, saveProfile } from "utils/profile"
 import { getObjCClassDeclar, log, showHUD } from "utils/common"
-import { closePanel } from "./switchPanel";
-import { $name } from "addon";
+import { closePanel } from "./switchPanel"
+import { eventCtrl } from "./handleReceivedEvent"
+import { $name } from "addon"
 
 const SettingViewController = JSB.defineClass(getObjCClassDeclar("SettingViewController", "UITableViewController"), settingViewControllerInst)
-const eventCtrl = eventHandlerController([
-    { event: `${$name}InputOver` },
-    { event: `${$name}SwitchChange` },
-    { event: `${$name}ButtonClick` },
-    { event: 'PopupMenuOnSelection' },
-    { event: 'ActiveDigestNote' },
-    { event: 'PopupMenuOnNote' }
-]);
 
 /**
  * MN 的生命周期有点离谱，尤其是先关闭笔记本再关闭文档，
