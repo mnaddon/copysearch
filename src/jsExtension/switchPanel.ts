@@ -66,8 +66,9 @@ const controllerWillLayoutSubviews = (controller: UIViewController) => {
 }
 
 const queryAddonCommandStatus = () => {
-    // 仅在学习模式下打开
-    if (Application.sharedInstance().studyController(self.window).studyMode == studyMode.study)
+    const mode = Application.sharedInstance().studyController(self.window).studyMode
+    // 复习模式下不显示图标
+    if (mode < studyMode.review)
         return {
             image: "logo.png",
             object: self,
