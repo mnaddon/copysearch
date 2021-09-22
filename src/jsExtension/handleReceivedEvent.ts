@@ -85,8 +85,8 @@ const onPopupMenuOnNote: eventHandler = ({ userInfo }) => {
   log("点击了摘录", "action")
   if (profile.on && profile.clickExcerptOn) {
     const note = <MbBookNote>userInfo.note
-    // 必然存在一个，否则不可能存在此摘录，由于自动转标题的存在，所以优先为标题
-    const text = note.noteTitle ?? note.excerptText!
+    // 必然存在一个，否则不可能存在此摘录
+    const text = note.excerptText ?? note.noteTitle
     copySearch({
       text
     })
