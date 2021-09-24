@@ -10,7 +10,7 @@ const profileType = {
     sentenceUrl: "https://translate.google.com/?hl=zh-CN&sl=en&tl=zh-CN&text=$&&op=translate",
     defaultUrl: "https://cn.bing.com/search?q=$&",
     customUrl: "",
-    customCopy: `"%title"`
+    customCopy: `"标题：{{title}}\\n内容：{{text}}\\n创建时间：{{createTime}}\\n链接：[{{title}}]({{link}})"`
 }
 
 const docProfileType = {

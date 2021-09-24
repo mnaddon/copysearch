@@ -39,7 +39,7 @@ const onSwitchChange: eventHandler = ({ userInfo }) => {
       layoutViewController()
       break
     case "copyMode":
-      showHUD("切换到 Copy 模式")
+      profile.copyMode ? showHUD("切换到 Copy 模式") : showHUD("切换到 Search 模式")
   }
 }
 
