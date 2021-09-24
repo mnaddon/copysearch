@@ -97,10 +97,8 @@ const utils = {
     if (profile.customUrl) {
       const params = string2ReplaceParam(profile.customUrl)
       for (const item of params) {
-        if (text.match(item.regexp)) {
-          const title = text.replace(item.regexp, item.newSubStr)
-          return text.replace(/^.*$/, title)
-        }
+        if (text.match(item.regexp))
+          return text.replace(item.regexp, item.newSubStr)
       }
     }
 
