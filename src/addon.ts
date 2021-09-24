@@ -2,9 +2,10 @@ import genDataSource from "utils/dataSource"
 import { profile } from "profile"
 import { isHalfWidth, wordCount } from "utils/text"
 import { getAllText, getSelectNodes } from "utils/note"
-import { showHUD } from "utils/common"
+import { log, showHUD } from "utils/common"
 import { string2ReplaceParam } from "utils/input"
 import mnaddon from "../mnaddon.json"
+import fetch from "utils/network"
 
 const configs: IConfig[] = [
   {
@@ -43,6 +44,11 @@ const configs: IConfig[] = [
         key: "copySelected",
         type: cellViewType.button,
         label: "复制卡片信息"
+      },
+      {
+        key: "test",
+        type: cellViewType.button,
+        label: "测试"
       }
     ]
   },
@@ -130,6 +136,18 @@ const utils = {
 }
 
 const actions: IActionMethod = {
+  async test({}) {
+    const url = "http://dict.e.opac.vip/dict.php?sw=hello"
+    try {
+      const res = await fetch(url, {
+        timeout: 1
+      }).then(res => res.json())
+      log(res, "network")
+    } catch (err) {
+      log(err, "network")
+      showHUD("请求超时，请检查网络问题")
+    }
+  },
   copySelected({}) {
     try {
       const nodes = getSelectNodes()

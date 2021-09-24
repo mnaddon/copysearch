@@ -6,13 +6,13 @@ class Response {
     this.data = data
   }
   json(): any {
-    const json = NSJSONSerialization.JSONObjectWithDataOptions(
+    const res = NSJSONSerialization.JSONObjectWithDataOptions(
       this.data,
       NSJSONReadingOptions.MutableContainers
     )
-    if (json) return json
-    // new Error 不能使用
-    throw "不能序列化为 JSON"
+    if (NSJSONSerialization.isValidJSONObject(res)) return res
+    // 无法使用 new Error
+    throw "返回值不是 JSON 格式"
   }
 }
 
@@ -64,11 +64,12 @@ const fetch = (
     NSURLConnection.sendAsynchronousRequestQueueCompletionHandler(
       request,
       queue,
-      (res: NSHTTPURLResponse, data: NSData, error: NSError) => {
+      (res: NSHTTPURLResponse, data: NSData, err: NSError) => {
         UIApplication.sharedApplication().networkActivityIndicatorVisible =
           false
+        // 很奇怪，获取不到 res 的属性
+        if (err) reject(err.localizedDescription)
         if (data) resolve(new Response(data))
-        else reject(error)
       }
     )
   })
