@@ -15,7 +15,7 @@ const configs: IConfig[] = [
       {
         key: "rightMode",
         type: cellViewType.switch,
-        label: "面板置于右侧"
+        label: "面板置于右侧",
       },
       {
         key: "copyMode",
@@ -43,8 +43,8 @@ const configs: IConfig[] = [
         key: "copySelected",
         type: cellViewType.button,
         label: "复制卡片信息",
-      }
-    ]
+      },
+    ],
   },
   {
     name: "Copy",
@@ -89,7 +89,7 @@ const configs: IConfig[] = [
         link: "https://busiyi.notion.site/Search-26440b198773492cbc1e39015ae55654",
       },
     ],
-  }
+  },
 ]
 
 const utils = {
@@ -108,8 +108,7 @@ const utils = {
       if (profile.sentenceUrl && wordCount(text) > 3)
         return text.replace(/^.*$/, profile.sentenceUrl)
     }
-    if (profile.defaultUrl)
-      return text.replace(/^.*$/, profile.defaultUrl)
+    if (profile.defaultUrl) return text.replace(/^.*$/, profile.defaultUrl)
     return false
   },
   getCustomText(note: MbBookNote) {
@@ -127,31 +126,31 @@ const utils = {
       _text = _text.replace(reg, <string>value)
     })
     return _text.replace(/\n{2,}/g, "\n")
-  }
+  },
 }
 
 const actions: IActionMethod = {
-  copySelected({ }) {
+  copySelected({}) {
     try {
       const nodes = getSelectNodes()
       let texts: string[] = []
-      if (nodes.length == 1)
-        texts.push(utils.getCustomText(nodes[0]))
-      else nodes.forEach((node, index) => {
-        texts.push(String(index + 1) + ". " + utils.getCustomText(node))
-      })
+      if (nodes.length == 1) texts.push(utils.getCustomText(nodes[0]))
+      else
+        nodes.forEach((node, index) => {
+          texts.push(String(index + 1) + ". " + utils.getCustomText(node))
+        })
       const pasteBoard = UIPasteboard.generalPasteboard()
       pasteBoard.string = texts.join("\n").trim()
     } catch {
       return
     }
     showHUD("复制成功")
-  }
+  },
 }
 const dataSource = genDataSource(configs, {
   // action 板块详情
   name: "MagicAction",
-  intro: "可多选卡片，复制内容格式同复制模式下的格式"
+  intro: "可多选卡片，复制内容格式同复制模式下的格式",
 })
 
 const $name = mnaddon.addonid.split(".")[2]

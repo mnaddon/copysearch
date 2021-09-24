@@ -8,9 +8,10 @@ const inst: InstMembers = {
   ...InstMethods,
   ...switchPanel,
   ...handleReceivedEvent,
-};
+}
 
 const cls: ClsMembers = {
-  ...clsMethons
+  ...clsMethons,
 }
-JSB.newAddon = (mainPath): WrapperObj<any> => JSB.defineClass(getObjCClassDeclar(mnaddon.title, "JSExtension"), inst, cls);
+JSB.newAddon = (mainPath): WrapperObj<any> =>
+  JSB.defineClass(getObjCClassDeclar(mnaddon.title, "JSExtension"), inst, cls)

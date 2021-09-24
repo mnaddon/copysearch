@@ -4,7 +4,8 @@ import { postNotification } from "./common"
  * 获取选中的卡片
  */
 const getSelectNodes = (): MbBookNote[] => {
-  const MindMapNodes: any[] = self.studyController.notebookController.mindmapView.selViewLst
+  const MindMapNodes: any[] =
+    self.studyController.notebookController.mindmapView.selViewLst
   if (MindMapNodes) return MindMapNodes.map(item => item.note.note)
   else return []
 }
@@ -39,7 +40,7 @@ const undoGrouping = (action: () => void) => {
 }
 
 const RefreshAfterDBChange = () => {
-  postNotification('RefreshAfterDBChange', { topicid: self.notebookId })
+  postNotification("RefreshAfterDBChange", { topicid: self.notebookId })
 }
 
 /**
@@ -67,8 +68,7 @@ const getAllText = (note: MbBookNote) => {
       case "TextNote":
       case "HtmlNote":
         const text = comment.text.trim()
-        if (text && !text.includes("marginnote3app"))
-          textArr.push(text)
+        if (text && !text.includes("marginnote3app")) textArr.push(text)
         break
       case "LinkNote":
         if (comment.q_htext) textArr.push(comment.q_htext.trim())
@@ -84,5 +84,5 @@ export {
   getCommentIndex,
   getNoteById,
   RefreshAfterDBChange,
-  getAllText
+  getAllText,
 }

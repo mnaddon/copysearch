@@ -1,4 +1,4 @@
-export { }
+export {}
 declare global {
   const enum cellViewType {
     plainText = 0,

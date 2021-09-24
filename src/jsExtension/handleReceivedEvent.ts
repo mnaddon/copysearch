@@ -1,7 +1,12 @@
 import { actions } from "addon"
 import { layoutViewController } from "jsExtension/switchPanel"
 import { profile } from "profile"
-import { getNoteById, getSelectNodes, RefreshAfterDBChange, undoGrouping } from "utils/note"
+import {
+  getNoteById,
+  getSelectNodes,
+  RefreshAfterDBChange,
+  undoGrouping,
+} from "utils/note"
 import { delayBreak, log, showHUD } from "utils/common"
 import copySearch from "./copySearchHandler"
 import eventHandlerController from "utils/event"
@@ -19,9 +24,9 @@ export const eventCtrl = eventHandlerController([
   { event: `${$name}InputOver` },
   { event: `${$name}SwitchChange` },
   { event: `${$name}ButtonClick` },
-  { event: 'PopupMenuOnSelection' },
-  { event: 'ActiveDigestNote' },
-  { event: 'PopupMenuOnNote' }
+  { event: "PopupMenuOnSelection" },
+  { event: "ActiveDigestNote" },
+  { event: "PopupMenuOnNote" },
 ])
 
 const onButtonClick: eventHandler = ({ userInfo }) => {
@@ -39,7 +44,9 @@ const onSwitchChange: eventHandler = ({ userInfo }) => {
       layoutViewController()
       break
     case "copyMode":
-      profile.copyMode ? showHUD("切换到 Copy 模式") : showHUD("切换到 Search 模式")
+      profile.copyMode
+        ? showHUD("切换到 Copy 模式")
+        : showHUD("切换到 Search 模式")
   }
 }
 
@@ -56,9 +63,10 @@ const onPopupMenuOnSelection: eventHandler = ({ userInfo }) => {
   // 选中文字不会触发矫正，所以可能是乱码
   if (profile.on && profile.selectTextOn) {
     const text = userInfo.documentController.selectionText
-    if (text) copySearch({
-      text
-    })
+    if (text)
+      copySearch({
+        text,
+      })
   }
 }
 
@@ -72,7 +80,7 @@ const onActiveDigestNote: eventHandler = async ({ userInfo }) => {
     // 貌似这个事件可以取到点击的摘录，不过这里只需要主摘录
     note = note.groupNoteId ? getNoteById(note.groupNoteId) : note
     copySearch({
-      note
+      note,
     })
   }
 }
@@ -88,14 +96,13 @@ const onPopupMenuOnNote: eventHandler = ({ userInfo }) => {
     // 必然存在一个，否则不可能存在此摘录
     const text = note.excerptText ?? note.noteTitle
     copySearch({
-      text
+      text,
     })
   }
 }
 
 // 有关摘录处理的功能请直接开发 ohmymn 插件，避免冲突
-const onProcessExcerptText: eventHandler = ({ userInfo }) => {
-}
+const onProcessExcerptText: eventHandler = ({ userInfo }) => {}
 
 export default {
   onButtonClick,
@@ -103,5 +110,5 @@ export default {
   onSwitchChange,
   onPopupMenuOnNote,
   onActiveDigestNote,
-  onPopupMenuOnSelection
+  onPopupMenuOnSelection,
 }
