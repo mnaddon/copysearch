@@ -37,9 +37,6 @@ const undoGrouping = (action: () => void) => {
     // 同步修改到数据库
     Database.sharedInstance().setNotebookSyncDirty(self.notebookid)
   })
-}
-
-const RefreshAfterDBChange = () => {
   postNotification("RefreshAfterDBChange", { topicid: self.notebookId })
 }
 
@@ -83,6 +80,5 @@ export {
   undoGrouping,
   getCommentIndex,
   getNoteById,
-  RefreshAfterDBChange,
   getAllText
 }

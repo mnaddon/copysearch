@@ -59,7 +59,7 @@ const fetch = (
 ): Promise<Response> => {
   return new Promise((resolve, reject) => {
     UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-    const queue = NSOperationQueue.new()
+    const queue = NSOperationQueue.mainQueue()
     const request = initRequest(url, options)
     NSURLConnection.sendAsynchronousRequestQueueCompletionHandler(
       request,
@@ -68,7 +68,7 @@ const fetch = (
         UIApplication.sharedApplication().networkActivityIndicatorVisible =
           false
         // 很奇怪，获取不到 res 的属性
-        if (err) reject(err.localizedDescription)
+        if (err.localizedDescription) reject(err.localizedDescription)
         if (data) resolve(new Response(data))
       }
     )

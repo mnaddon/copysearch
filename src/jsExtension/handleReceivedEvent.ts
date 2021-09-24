@@ -1,12 +1,7 @@
 import { actions } from "addon"
 import { layoutViewController } from "jsExtension/switchPanel"
 import { profile } from "profile"
-import {
-  getNoteById,
-  getSelectNodes,
-  RefreshAfterDBChange,
-  undoGrouping
-} from "utils/note"
+import { getNoteById, getSelectNodes, undoGrouping } from "utils/note"
 import { delayBreak, log, showHUD } from "utils/common"
 import copySearch from "./copySearchHandler"
 import eventHandlerController from "utils/event"
@@ -34,7 +29,6 @@ const onButtonClick: eventHandler = ({ userInfo }) => {
   actions[userInfo.key]({
     content: userInfo.content
   })
-  RefreshAfterDBChange()
 }
 
 const onSwitchChange: eventHandler = ({ userInfo }) => {
