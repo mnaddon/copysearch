@@ -5,7 +5,7 @@ import {
   getNoteById,
   getSelectNodes,
   RefreshAfterDBChange,
-  undoGrouping,
+  undoGrouping
 } from "utils/note"
 import { delayBreak, log, showHUD } from "utils/common"
 import copySearch from "./copySearchHandler"
@@ -26,13 +26,13 @@ export const eventCtrl = eventHandlerController([
   { event: `${$name}ButtonClick` },
   { event: "PopupMenuOnSelection" },
   { event: "ActiveDigestNote" },
-  { event: "PopupMenuOnNote" },
+  { event: "PopupMenuOnNote" }
 ])
 
 const onButtonClick: eventHandler = ({ userInfo }) => {
   // 传入你需要的内容
   actions[userInfo.key]({
-    content: userInfo.content,
+    content: userInfo.content
   })
   RefreshAfterDBChange()
 }
@@ -65,7 +65,7 @@ const onPopupMenuOnSelection: eventHandler = ({ userInfo }) => {
     const text = userInfo.documentController.selectionText
     if (text)
       copySearch({
-        text,
+        text
       })
   }
 }
@@ -80,7 +80,7 @@ const onActiveDigestNote: eventHandler = async ({ userInfo }) => {
     // 貌似这个事件可以取到点击的摘录，不过这里只需要主摘录
     note = note.groupNoteId ? getNoteById(note.groupNoteId) : note
     copySearch({
-      note,
+      note
     })
   }
 }
@@ -96,7 +96,7 @@ const onPopupMenuOnNote: eventHandler = ({ userInfo }) => {
     // 必然存在一个，否则不可能存在此摘录
     const text = note.excerptText ?? note.noteTitle
     copySearch({
-      text,
+      text
     })
   }
 }
@@ -110,5 +110,5 @@ export default {
   onSwitchChange,
   onPopupMenuOnNote,
   onActiveDigestNote,
-  onPopupMenuOnSelection,
+  onPopupMenuOnSelection
 }

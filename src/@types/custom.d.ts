@@ -6,7 +6,7 @@ declare global {
     button = 2,
     buttonWithInput = 3,
     input = 4,
-    inlineInput = 5,
+    inlineInput = 5
   }
 
   // 配置文件

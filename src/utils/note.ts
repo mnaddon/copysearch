@@ -84,5 +84,5 @@ export {
   getCommentIndex,
   getNoteById,
   RefreshAfterDBChange,
-  getAllText,
+  getAllText
 }

@@ -164,7 +164,7 @@ export const controllers = {
     view.autoresizingMask = (1 << 1) | (1 << 5)
     view.text = text
     return view
-  },
+  }
 }
 
 export default {
@@ -172,5 +172,5 @@ export default {
   tableViewNumberOfRowsInSection,
   tableViewTitleForHeaderInSection,
   tableViewHeightForRowAtIndexPath,
-  tableViewCellForRowAtIndexPath,
+  tableViewCellForRowAtIndexPath
 }

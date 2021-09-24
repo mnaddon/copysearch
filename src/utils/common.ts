@@ -66,5 +66,5 @@ export {
   delay,
   delayBreak,
   openUrl,
-  postNotification,
+  postNotification
 }

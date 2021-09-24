@@ -11,7 +11,7 @@ const profileType = {
     "https://translate.google.com/?hl=zh-CN&sl=en&tl=zh-CN&text=$&&op=translate",
   defaultUrl: "https://cn.bing.com/search?q=$&",
   customUrl: "",
-  customCopy: `"标题：{{title}}\\n内容：{{text}}\\n创建时间：{{createTime}}\\n链接：[{{title}}]({{link}})"`,
+  customCopy: `"标题：{{title}}\\n内容：{{text}}\\n创建时间：{{createTime}}\\n链接：[{{title}}]({{link}})"`
 }
 
 const docProfileType = {}
@@ -20,11 +20,11 @@ export type IProfile = typeof profileType
 export type IProfile_doc = typeof docProfileType
 
 const profile: { [k: string]: boolean | string } & IProfile = {
-  ...profileType,
+  ...profileType
 }
 
 const docProfile: IProfile_doc = {
-  ...docProfileType,
+  ...docProfileType
 }
 
 export { profile, docProfile }

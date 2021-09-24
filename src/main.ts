@@ -7,11 +7,11 @@ import mnaddon from "../mnaddon.json"
 const inst: InstMembers = {
   ...InstMethods,
   ...switchPanel,
-  ...handleReceivedEvent,
+  ...handleReceivedEvent
 }
 
 const cls: ClsMembers = {
-  ...clsMethons,
+  ...clsMethons
 }
 JSB.newAddon = (mainPath): WrapperObj<any> =>
   JSB.defineClass(getObjCClassDeclar(mnaddon.title, "JSExtension"), inst, cls)

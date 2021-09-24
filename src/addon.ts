@@ -15,36 +15,36 @@ const configs: IConfig[] = [
       {
         key: "rightMode",
         type: cellViewType.switch,
-        label: "面板置于右侧",
+        label: "面板置于右侧"
       },
       {
         key: "copyMode",
         type: cellViewType.switch,
-        label: "切换为复制模式",
+        label: "切换为复制模式"
       },
       {
         key: "selectTextOn",
         type: cellViewType.switch,
-        label: "选中文字时执行",
+        label: "选中文字时执行"
       },
       {
         key: "clickExcerptOn",
         type: cellViewType.switch,
-        label: "点击摘录时执行",
+        label: "点击摘录时执行"
       },
       {
         key: "clickCardOn",
         type: cellViewType.switch,
-        label: "点击卡片时执行",
-      },
+        label: "点击卡片时执行"
+      }
     ],
     actions: [
       {
         key: "copySelected",
         type: cellViewType.button,
-        label: "复制卡片信息",
-      },
-    ],
+        label: "复制卡片信息"
+      }
+    ]
   },
   {
     name: "Copy",
@@ -53,9 +53,9 @@ const configs: IConfig[] = [
     settings: [
       {
         key: "customCopy",
-        type: cellViewType.input,
-      },
-    ],
+        type: cellViewType.input
+      }
+    ]
   },
   {
     name: "Search",
@@ -65,31 +65,31 @@ const configs: IConfig[] = [
       {
         key: "titleLinkFirst",
         type: cellViewType.switch,
-        label: "标题链接取第一个",
+        label: "标题链接取第一个"
       },
       {
         key: "wordUrl",
         type: cellViewType.inlineInput,
-        label: "单词或短语",
+        label: "单词或短语"
       },
       {
         key: "sentenceUrl",
         type: cellViewType.inlineInput,
-        label: "英语句子",
+        label: "英语句子"
       },
       {
         key: "defaultUrl",
         type: cellViewType.inlineInput,
-        label: "默认情况",
+        label: "默认情况"
       },
       {
         key: "customUrl",
         type: cellViewType.input,
         help: "自定义，点击查看具体输入格式",
-        link: "https://busiyi.notion.site/Search-26440b198773492cbc1e39015ae55654",
-      },
-    ],
-  },
+        link: "https://busiyi.notion.site/Search-26440b198773492cbc1e39015ae55654"
+      }
+    ]
+  }
 ]
 
 const utils = {
@@ -118,7 +118,7 @@ const utils = {
       text: getAllText(note),
       createTime: note.createDate,
       modifiedTime: note.modifiedDate,
-      link: "marginnote3app://note/" + note.noteId,
+      link: "marginnote3app://note/" + note.noteId
     }
     let _text = JSON.parse(`{"text": ${profile.customCopy}}`).text
     Object.entries(vars).forEach(([key, value]) => {
@@ -126,7 +126,7 @@ const utils = {
       _text = _text.replace(reg, <string>value)
     })
     return _text.replace(/\n{2,}/g, "\n")
-  },
+  }
 }
 
 const actions: IActionMethod = {
@@ -145,12 +145,12 @@ const actions: IActionMethod = {
       return
     }
     showHUD("复制成功")
-  },
+  }
 }
 const dataSource = genDataSource(configs, {
   // action 板块详情
   name: "MagicAction",
-  intro: "可多选卡片，复制内容格式同复制模式下的格式",
+  intro: "可多选卡片，复制内容格式同复制模式下的格式"
 })
 
 const $name = mnaddon.addonid.split(".")[2]

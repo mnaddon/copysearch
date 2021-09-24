@@ -4,7 +4,7 @@ const genSection = (config: IConfig): ISection => {
     rows.push({
       type: cellViewType.plainText,
       label: config.intro,
-      link: config.link ?? "",
+      link: config.link ?? ""
     })
   for (const setting of config.settings) {
     // magicaction 的 help 显示在弹窗上
@@ -13,7 +13,7 @@ const genSection = (config: IConfig): ISection => {
         {
           type: cellViewType.plainText,
           label: setting.help,
-          link: setting.link ?? "",
+          link: setting.link ?? ""
         },
         setting
       )
@@ -21,7 +21,7 @@ const genSection = (config: IConfig): ISection => {
   }
   return {
     header: config.name,
-    rows,
+    rows
   }
 }
 
@@ -39,7 +39,7 @@ const genDataSource = (
     intro: actionInfo.intro ?? "",
     link: actionInfo.link,
     settings: [],
-    actions: [],
+    actions: []
   }
   for (let config of configs) {
     dataSource.push(genSection(config))
@@ -63,7 +63,7 @@ const genDataSource = (
   dataSource[dataSource.length - 1].rows.push({
     type: cellViewType.button,
     key: "space",
-    label: "",
+    label: ""
   })
 
   return dataSource

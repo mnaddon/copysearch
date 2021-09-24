@@ -19,7 +19,7 @@ declare global {
 
   const enum groupMode {
     Tree,
-    Frame,
+    Frame
   }
 
   type noteComment = textComment | htmlComment | linkComment | paintComment
