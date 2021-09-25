@@ -160,13 +160,15 @@ declare global {
      * @param index NSInteger
      */
     removeCommentByIndex(index: number): void
+  }
+  class Note {
     /**
      * @returns MbBookNote*
      * @param title NSString*
      * @param topic MbTopic*
      * @param book MbBook*
      */
-    static createWithTitle(
+    static createWithTitleNotebookDocument(
       title: string,
       topic: MbTopic,
       book: MbBook
