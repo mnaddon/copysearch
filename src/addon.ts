@@ -1,7 +1,7 @@
 import genDataSource from "utils/dataSource"
 import { profile } from "profile"
 import { isHalfWidth, wordCount } from "utils/text"
-import { getAllText, getSelectNodes } from "utils/note"
+import { getAllText, getSelectNodes, undoGrouping } from "utils/note"
 import { log, showHUD } from "utils/common"
 import { string2ReplaceParam } from "utils/input"
 import mnaddon from "../mnaddon.json"
@@ -137,16 +137,21 @@ const utils = {
 
 const actions: IActionMethod = {
   async test({}) {
-    const url = "http://dict.e.opac.vip/dict.php?sw=hello"
-    try {
-      const res = await fetch(url, {
-        timeout: 1
-      }).then(res => res.json())
-      log(res, "network")
-    } catch (err) {
-      log(err, "network")
-      showHUD("请求超时，请检查网络问题")
-    }
+    const note = getSelectNodes()[0]
+    const notebook = Database.sharedInstance().getNotebookById(
+      note.notebookId!
+    )!
+    const doc = Database.sharedInstance().getDocumentById(note.docMd5!)!
+    undoGrouping(() => {
+      const testNote = Note.createWithTitleNotebookDocument(
+        "测试1",
+        notebook,
+        doc
+      )
+      // testNote.appendNoteLink(note)
+      // testNote.mindmapPosition = note.mindmapPosition
+      log(testNote.mindmapPosition)
+    })
   },
   copySelected({}) {
     try {

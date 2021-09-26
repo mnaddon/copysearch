@@ -56,7 +56,6 @@ const textFieldShouldReturn = (sender: UITextField) => {
     sender.resignFirstResponder()
     row.content = text
     postNotification(`${$name}InputOver`, {
-      name: section.header.toLocaleLowerCase(),
       key: row.key,
       content: text
     })
@@ -70,7 +69,6 @@ const switchChange = (sender: UISwitch) => {
   const row = section.rows[indexPath.row]
   row.status = sender.on
   postNotification(`${$name}SwitchChange`, {
-    name: section.header.toLowerCase(),
     key: row.key,
     status: sender.on
   })

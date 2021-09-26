@@ -58,6 +58,13 @@ const postNotification = (key: string, userInfo: any) => {
   )
 }
 
+const isThisWindow = (sender: any, window: any) => {
+  return Application.sharedInstance().checkNotifySenderInWindow(
+    sender,
+    self.window
+  )
+}
+
 export {
   log,
   showHUD,
@@ -66,5 +73,6 @@ export {
   delay,
   delayBreak,
   openUrl,
-  postNotification
+  postNotification,
+  isThisWindow
 }
